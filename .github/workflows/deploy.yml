@@ -29,4 +29,4 @@ jobs:
       - name: Desplegar con rsync
         run: |
           rsync -avz -e "ssh -p 22 -o StrictHostKeyChecking=yes" ./ \
-          angel@serveo.net:/c/Users/Angel/Desktop/mi-web-cicd-test
+          angel@alex_vanguardia.serveo.net:/c/Users/Angel/Desktop/mi-web-cicd-test
