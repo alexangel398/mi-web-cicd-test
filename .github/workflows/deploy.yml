@@ -14,7 +14,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Instalar dependencias necesarias
-        run: sudo apt-get update && sudo apt-get install -y rsync openssh-client
+        run: sudo apt-get update && sudo apt-get install -y openssh-client
 
       - name: Configurar clave SSH
         run: |
@@ -27,7 +27,6 @@ jobs:
           ssh-keyscan -p 22 serveo.net >> ~/.ssh/known_hosts
           ssh-keyscan -p 22 alex_vanguardia.serveo.net >> ~/.ssh/known_hosts
 
-      - name: Desplegar con rsync
+      - name: Desplegar archivos con SCP
         run: |
-          rsync -avz -e "ssh -p 22 -o StrictHostKeyChecking=yes" ./ \
-          angel@alex_vanguardia.serveo.net:/c/Users/Angel/Desktop/mi-web-cicd-test
+          scp -P 22 -o StrictHostKeyChecking=yes -r ./index.html ./styles.css ./script.js ./server.js ./package.json angel@alex_vanguardia.serveo.net:"C:/Users/Angel/Desktop/mi-web-cicd-test/"
