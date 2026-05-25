@@ -25,6 +25,7 @@ jobs:
       - name: Aceptar clave del host remoto
         run: |
           ssh-keyscan -p 22 serveo.net >> ~/.ssh/known_hosts
+          ssh-keyscan -p 22 alex_vanguardia.serveo.net >> ~/.ssh/known_hosts
 
       - name: Desplegar con rsync
         run: |
