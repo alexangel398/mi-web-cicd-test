@@ -1,4 +1,4 @@
-name: Deploy con SSH y ngrok
+name: Deploy con SSH y Serveo
 
 on:
   push:
@@ -24,9 +24,9 @@ jobs:
 
       - name: Aceptar clave del host remoto
         run: |
-          ssh-keyscan -p 16167 0.tcp.sa.ngrok.io >> ~/.ssh/known_hosts
+          ssh-keyscan -p 22 serveo.net >> ~/.ssh/known_hosts
 
       - name: Desplegar con rsync
         run: |
-          rsync -avz -e "ssh -p 16167 -o StrictHostKeyChecking=yes" ./ \
-          estebancalcagno@0.tcp.sa.ngrok.io:\Users\Angel\Desktop\mi-web-cicd-test>
+          rsync -avz -e "ssh -p 22 -o StrictHostKeyChecking=yes" ./ \
+          angel@serveo.net:/c/Users/Angel/Desktop/mi-web-cicd-test
