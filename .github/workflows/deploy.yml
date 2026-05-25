@@ -1,0 +1,32 @@
+name: Deploy con SSH y ngrok
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout del código
+        uses: actions/checkout@v4
+
+      - name: Instalar dependencias necesarias
+        run: sudo apt-get update && sudo apt-get install -y rsync openssh-client
+
+      - name: Configurar clave SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+
+      - name: Aceptar clave del host remoto
+        run: |
+          ssh-keyscan -p 16167 0.tcp.sa.ngrok.io >> ~/.ssh/known_hosts
+
+      - name: Desplegar con rsync
+        run: |
+          rsync -avz -e "ssh -p 16167 -o StrictHostKeyChecking=yes" ./ \
+          estebancalcagno@0.tcp.sa.ngrok.io:\Users\Angel\Desktop\mi-web-cicd-test>
