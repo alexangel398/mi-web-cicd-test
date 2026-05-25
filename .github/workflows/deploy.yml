@@ -29,4 +29,4 @@ jobs:
 
       - name: Desplegar archivos con SCP
         run: |
-          scp -P 22 -o StrictHostKeyChecking=yes -r ./index.html ./styles.css ./script.js ./server.js ./package.json angel@alex_vanguardia.serveo.net:"C:/Users/Angel/Desktop/mi-web-cicd-test/"
+          scp -O -P 22 -o StrictHostKeyChecking=yes -r ./ angel@alex_vanguardia.serveo.net:"C:/Users/Angel/Desktop/mi-web-cicd-test/"
